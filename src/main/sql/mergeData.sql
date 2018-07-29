@@ -1,41 +1,39 @@
-select 
- c.c_custkey,
- concat('"', cast (c.c_name as varchar(0)), '"') as c_name     ,                             
- concat('"', cast (c.c_address as varchar(0)), '"') as c_address  ,                             
- c.c_nationkey  ,                                
- concat('"', cast (c.c_phone as varchar(0)), '"') as c_phone    ,                             
- c.c_acctbal    ,                      
- concat('"', cast (c.c_mktsegment as varchar(0)), '"') as c_mktsegment,                             
- concat('"', cast (c.c_comment as varchar(0)), '"') as c_comment  ,                             
-   o.o_orderkey,
-   concat('"', cast (o.o_orderstatus as varchar(0)), '"') as o_orderstatus,
-   o.o_totalprice,
-   concat('"', cast (o.o_orderdate as varchar(0)), '"') as o_orderdate,
-   concat('"', cast (o.o_orderpriority as varchar(0)), '"') as o_orderpriority,
-   concat('"', cast (o.o_clerk as varchar(0)), '"') as o_clerk,
-   o.o_shippriority,
-   concat('"', cast (o.o_comment as varchar(0)), '"') as o_comment,
-     l.l_partkey,
-     l.l_suppkey,
-     l.l_linenumber,
-     l.l_quantity,
-     l.l_extendedprice,
-     l.l_discount,
-     l.l_tax,
-     concat('"', cast (l.l_returnflag as varchar(0)), '"') as l_returnflag,
-     concat('"', cast (l.l_linestatus as varchar(0)), '"') as l_linestatus,
-     concat('"', cast (l.l_shipdate as varchar(0)), '"') as l_shipdate,
-     concat('"', cast (l.l_commitdate as varchar(0)), '"') as l_commitdate,
-     concat('"', cast (l.l_receiptdate as varchar(0)), '"') as l_receiptdate,
-     concat('"', cast (l.l_shipinstruct as varchar(0)), '"') as l_shipinstruct,
-     concat('"', cast (l.l_shipmode as varchar(0)), '"') as l_shipmode,
-     concat('"', cast (l.l_comment as varchar(0)), '"') as l_comment
-from 
-  dfs.data.`tpc-h/sf10/customer` c,
-  dfs.data.`tpc-h/sf10/orders` o,
-  dfs.data.`tpc-h/sf10/lineitem` l
-where 
-   c.c_custkey = o.o_custkey and
-   o.o_orderkey = l.l_orderkey
-   and c.c_custkey in ( 7180,   951313 )
-order by c.c_custkey, o.o_orderkey
+CREATE TABLE complex AS 
+SELECT   C.C_CUSTKEY                                                        AS C_CUSTKEY, 
+         CONCAT('"', CAST (C.C_NAME AS    VARCHAR), '"')                    AS C_NAME, 
+         CONCAT('"', CAST (C.C_ADDRESS AS VARCHAR), '"')                    AS C_ADDRESS, 
+         C.C_NATIONKEY                                                      AS C_NATIONKEY, 
+         CONCAT('"', CAST (C.C_PHONE AS VARCHAR), '"')                      AS C_PHONE, 
+         C.C_ACCTBAL                                                        AS C_ACCTBAL, 
+         CONCAT('"', CAST (C.C_MKTSEGMENT AS VARCHAR), '"')                 AS C_MKTSEGMENT, 
+         CONCAT('"', CAST (C.C_COMMENT AS    VARCHAR), '"')                 AS C_COMMENT, 
+         O.O_ORDERKEY                                                       AS O_ORDERKEY, 
+         CONCAT('"', CAST (O.O_ORDERSTATUS AS VARCHAR), '"')                AS O_ORDERSTATUS , 
+         O.O_TOTALPRICE                                                     AS O_TOTALPRICE, 
+         CONCAT('"', CAST (O.O_ORDERDATE AS     VARCHAR), '"')              AS O_ORDERDATE, 
+         CONCAT('"', CAST (O.O_ORDERPRIORITY AS VARCHAR), '"')              AS O_ORDERPRIORITY, 
+         CONCAT('"', CAST (O.O_CLERK AS         VARCHAR), '"')              AS O_CLERK, 
+         O.O_SHIPPRIORITY                                                   AS O_SHIPPRIORITY, 
+         CONCAT('"', CAST (O.O_COMMENT AS VARCHAR), '"')                    AS O_COMMENT, 
+         L.L_PARTKEY                                                        AS L_PARTKEY, 
+         L.L_SUPPKEY                                                        AS L_SUPPKEY, 
+         L.L_LINENUMBER                                                     AS L_LINENUMBER, 
+         L.L_QUANTITY                                                       AS L_QUANTITY, 
+         L.L_EXTENDEDPRICE                                                  AS L_EXTENDEDPRICE, 
+         L.L_DISCOUNT                                                       AS L_DISCOUNT, 
+         L.L_TAX                                                            AS L_TAX, 
+         CONCAT('"', CAST (L.L_RETURNFLAG AS   VARCHAR), '"')               AS L_RETURNFLAG, 
+         CONCAT('"', CAST (L.L_LINESTATUS AS   VARCHAR), '"')               AS L_LINESTATUS, 
+         CONCAT('"', CAST (L.L_SHIPDATE AS     VARCHAR), '"')               AS L_SHIPDATE, 
+         CONCAT('"', CAST (L.L_COMMITDATE AS   VARCHAR), '"')               AS L_COMMITDATE, 
+         CONCAT('"', CAST (L.L_RECEIPTDATE AS  VARCHAR), '"')               AS L_RECEIPTDATE , 
+         CONCAT('"', CAST (L.L_SHIPINSTRUCT AS VARCHAR), '"')               AS L_SHIPINSTRUCT,
+         CONCAT('"', CAST (L.L_SHIPMODE AS     VARCHAR), '"')               AS L_SHIPMODE, 
+         CONCAT('"', CAST (L.L_COMMENT AS      VARCHAR), '"')               AS L_COMMENT 
+FROM     customer C, 
+         orders O, 
+         lineitem L 
+WHERE    C.C_CUSTKEY = O.O_CUSTKEY 
+AND      O.O_ORDERKEY = L.L_ORDERKEY 
+ORDER BY C.C_CUSTKEY, 
+         O.O_ORDERKEY

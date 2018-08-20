@@ -104,10 +104,10 @@ public class ComplexJSON {
       sb.append("\"O_ORDERKEY\" :").append(o_orderkey).append(", ");
       sb.append("\"O_ORDERSTATUS\" :").append("\"").append(o_orderstatus).append("\"").append(", ");
       sb.append("\"O_TOTALPRICE\" :").append(o_totalprice).append(", ");
-      sb.append("\"O_ORDERDATE\" :").append("\"").append(o_orderdate).append("\"").append(", ");
+      sb.append("\"O_ORDERDATE\" :").append("{\"$dateDay\" : ").append("\"").append(o_orderdate).append("\"}").append(", ");
       sb.append("\"O_ORDERPRIORITY\" :").append("\"").append(o_orderpriority).append("\"").append(", ");
       sb.append("\"O_CLERK\" :").append("\"").append(o_clerk).append("\"").append(", ");
-      sb.append("\"O_SHIPPRIORITY\" :").append(o_shippriority).append(", ");
+      sb.append("\"O_SHIPPRIORITY\" :").append("{\"$numberLong\" : ").append(o_shippriority).append("}, ");
       sb.append("\"O_COMMENT\" :").append("\"").append(o_comment).append("\"").append(", ");
       sb.append("\"O_KEYS\" :").append("{ ");
       if ( o_lineitems.size() > 0) {
@@ -213,7 +213,7 @@ public class ComplexJSON {
       sb.append("{ ");
       sb.append("\"L_PARTKEY\" :").append(l_partkey).append(", ");
       sb.append("\"L_SUPPKEY\" :").append(l_suppkey).append(", ");
-      sb.append("\"L_LINENUMBER\" :").append(l_linenumber).append(", ");
+      sb.append("\"L_LINENUMBER\" :").append("{\"$numberLong\" : ").append(l_linenumber).append("}, ");
       sb.append("\"L_QUANTITY\" :").append(l_quantity).append(", ");
       sb.append("\"L_EXTENDEDPRICE\" :").append(l_extendedprice).append(", ");
       sb.append("\"L_DISCOUNT\" :").append(l_discount).append(", ");

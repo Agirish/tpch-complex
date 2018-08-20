@@ -1,3 +1,5 @@
+package com.mapr.tpch;
+
 import java.io.InputStream;
 import java.io.PushbackInputStream;
 import java.io.InputStreamReader;

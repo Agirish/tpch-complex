@@ -1,3 +1,5 @@
+package com.mapr.tpch;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +64,7 @@ public class ComplexJSON {
       sb.append("\"C_ORDERS_DATES\" :").append("[ ");
       for (int i = 0; i < c_orders.size(); i++) {
         Order o = c_orders.get(i);
-        sb.append(o.toScalarList4());
+        sb.append("{\"$dateday\" : ").append(o.toScalarList4()).append("}");
         if (i < c_orders.size() - 1) {
           sb.append(", ");
         }
@@ -218,9 +220,9 @@ public class ComplexJSON {
       sb.append("\"L_TAX\" :").append(l_tax).append(", ");
       sb.append("\"L_RETURNFLAG\" :").append("\"").append(l_returnflag).append("\"").append(", ");
       sb.append("\"L_LINESTATUS\" :").append("\"").append(l_linestatus).append("\"").append(", ");
-      sb.append("\"L_SHIPDATE\" :").append("\"").append(l_shipdate).append("\"").append(", ");
-      sb.append("\"L_COMMITDATE\" :").append("\"").append(l_commitdate).append("\"").append(", ");
-      sb.append("\"L_RECEIPTDATE\" :").append("\"").append(l_receiptdate).append("\"").append(", ");
+      sb.append("\"L_SHIPDATE\" :").append("{\"$dateday\" : ").append("\"").append(l_shipdate).append("\"}").append(", ");
+      sb.append("\"L_COMMITDATE\" :").append("{\"$dateday\" : ").append("\"").append(l_commitdate).append("\"}").append(", ");
+      sb.append("\"L_RECEIPTDATE\" :").append("{\"$dateday\" : ").append("\"").append(l_receiptdate).append("\"}").append(", ");
       sb.append("\"L_SHIPINSTRUCT\" :").append("\"").append(l_shipinstruct).append("\"").append(", ");
       sb.append("\"L_SHIPMODE\" :").append("\"").append(l_shipmode).append("\"").append(", ");
       sb.append("\"L_COMMENT\" :").append("\"").append(l_comment).append("\"");
@@ -249,9 +251,9 @@ public class ComplexJSON {
     public String toDatesMap() {
 
       StringBuilder sb = new StringBuilder();
-      sb.append("\"L_SHIPDATE\" :").append("\"").append(l_shipdate).append("\"").append(", ");
-      sb.append("\"L_COMMITDATE\" :").append("\"").append(l_commitdate).append("\"").append(", ");
-      sb.append("\"L_RECEIPTDATE\" :").append("\"").append(l_receiptdate).append("\"");
+      sb.append("\"L_SHIPDATE\" :").append("{\"$dateday\" : ").append("\"").append(l_shipdate).append("\"}").append(", ");
+      sb.append("\"L_COMMITDATE\" :").append("{\"$dateday\" : ").append("\"").append(l_commitdate).append("\"}").append(", ");
+      sb.append("\"L_RECEIPTDATE\" :").append("{\"$dateday\" : ").append("\"").append(l_receiptdate).append("\"}");
 
       return sb.toString();
     }
@@ -352,6 +354,7 @@ public class ComplexJSON {
       o.o_lineitems.add(l);
       prevCustKey = custKey;
     }
+
     bufferedWriter.write(c.toJSON(0));
 
     bufferedWriter.flush();
